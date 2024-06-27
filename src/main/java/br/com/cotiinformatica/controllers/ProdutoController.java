@@ -1,4 +1,5 @@
 package br.com.cotiinformatica.controllers;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import org.modelmapper.ModelMapper;
@@ -19,11 +20,17 @@ import br.com.cotiinformatica.repositories.ProdutoRepository;
 @RestController
 @RequestMapping("/api/produtos")
 public class ProdutoController {
+	
+	
 	@Autowired
 	private ModelMapper modelMapper;
 	
+	
+	
 	@PostMapping
 	public ProdutoResponseDto post(@RequestBody ProdutoRequestDto request) throws Exception {
+		
+		
 		//copiando os dados da classe REQUEST para a entidade
 		Produto produto = modelMapper.map(request, Produto.class);
 		
@@ -41,6 +48,8 @@ public class ProdutoController {
 		//retornar os dados do produto cadastrado no banco de dados
 		return modelMapper.map(produtoCadastrado, ProdutoResponseDto.class);		
 	}
+		
+	
 	@PutMapping("{id}")
 	public ProdutoResponseDto put(@PathVariable Integer id, @RequestBody ProdutoRequestDto request) throws Exception {
 		//copiando os dados da classe REQUEST para a entidade
@@ -61,6 +70,8 @@ public class ProdutoController {
 		//retornar os dados do produto atualizado no banco de dados
 		return modelMapper.map(produtoAtualizado, ProdutoResponseDto.class);
 	}
+	
+	
 	@DeleteMapping("{id}")
 	public ProdutoResponseDto delete(@PathVariable Integer id) throws Exception {
 		//consultando o produto no banco de dados através do ID
@@ -73,6 +84,8 @@ public class ProdutoController {
 		//retornando os dados do produto excluido no banco de dados
 		return modelMapper.map(produto, ProdutoResponseDto.class);
 	}
+		
+	
 	@GetMapping
 	public List<ProdutoResponseDto> getAll() throws Exception {
 		//consultando os produtos no banco de dados
@@ -89,6 +102,7 @@ public class ProdutoController {
 		return response;
 	}
 
+	
 	@GetMapping("{id}")
 	public ProdutoResponseDto getById(@PathVariable Integer id) throws Exception {
 		
